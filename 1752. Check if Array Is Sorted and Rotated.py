@@ -1,0 +1,20 @@
+# Given an array nums, return true if the array was originally sorted in non-decreasing order, then rotated some number of positions (including zero). Otherwise, return false.
+# There may be duplicates in the original array.
+# Note: An array A rotated by x positions results in an array B of the same length such that B[i] == A[(i+x) % A.length] for every valid index i.
+
+class Solution:
+    def check(self, nums: List[int]) -> bool:
+        sort = sorted(nums)
+        if nums == sort: return True
+
+        x = nums.index(min(nums))
+        while True:
+            if nums[x-1] > nums[x]:
+                break
+            else:
+                x = x-1
+
+        for i in range( 0, len(nums) ):
+            if sort[i] != nums[ (i+x) % len(nums) ]:
+                return False
+        return True
